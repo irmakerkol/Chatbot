@@ -1,3 +1,6 @@
+
+![ChatGPT Image Apr 4, 2025, 05_33_16 PM](https://github.com/user-attachments/assets/33228c55-a105-44f9-9182-0a4f7b08b2ee)
+
 # Instagram Chatbot Integration with CSV-Based Conditions
 
 This project is a Flask-based application that integrates with the Instagram Graph API to create a highly flexible chatbot. The chatbot uses a CSV file to define keyword-based conditions and returns one or more responses (plain text or button messages) depending on the incoming Instagram message. It mimics ManyChat’s behavior by evaluating multiple conditions and sending multiple messages if needed.
