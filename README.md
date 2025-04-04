@@ -58,14 +58,49 @@ This project is a Flask-based application that integrates with the Instagram Gra
 4. **Set Environment Variables:**
    Create a CSV file (default: conditions.csv) with the following columns:
 
-    contains_all: Semicolon-separated list of keywords that must all be present.
+    `contains_all:` Semicolon-separated list of keywords that must all be present.
 
-    contains_any: Semicolon-separated list of keywords where at least one must be present.
+    `contains_any:` Semicolon-separated list of keywords where at least one must be present.
 
-    does_not_contain: Semicolon-separated list of keywords that must not be present.
+    `does_not_contain:` Semicolon-separated list of keywords that must not be present.
 
-    response_type: The type of response (text for plain text, buttons for button messages).
+    `response_type:` The type of response (text for plain text, buttons for button messages).
 
-    response_content: For text, this is the message string; for buttons, this is a JSON string defining the button structure.
+    `response_content:` For text, this is the message string; for buttons, this is a JSON string defining the button structure.
 
 
+## Running the Application
+
+  1. **Start the Flask Application:**
+
+     ```bash
+     python ig_chatbot.py
+     
+  2. **Configure the Instagram Webhook:**
+     In your Facebook Developer dashboard, set the webhook URL (e.g., https://yourdomain.com/webhook) for your Instagram Business Account.
+     During verification, Instagram will send a GET request with hub.challenge and hub.verify_token.
+     The app will return the challenge token if the VERIFY_TOKEN matches.
+
+## How it Works
+  Webhook Verification:
+  Instagram sends a GET request for webhook verification. The app checks the provided verify token and returns the challenge if it matches.
+  
+  Message Processing:
+  Incoming Instagram messages (found in the entry and messaging fields) are processed by comparing the message text against all rules defined in the CSV file.
+  
+  Response Sending:
+  For every rule that matches, the app sends the corresponding response via the Instagram Graph API. If multiple rules match, multiple responses are sent.
+
+
+## Contributing
+Contributions are welcome! Please feel free to open issues or submit pull requests.
+
+
+## License
+This project is licensed under the MIT License.
+
+---
+
+Feel free to update any sections or add further instructions as needed for your project.
+
+  
