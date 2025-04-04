@@ -1,5 +1,5 @@
 
-![ChatGPT Image Apr 4, 2025, 05_33_16 PM](https://github.com/user-attachments/assets/6f0b72ad-1c36-42f7-aac4-8b3b7a53f43e)
+![ChatGPT Image Apr 4, 2025, 05_38_20 PM](https://github.com/user-attachments/assets/d32324a4-1617-43a1-90a9-aaed81016b9d)
 
 # Instagram Chatbot Integration with CSV-Based Conditions
 
