@@ -1,0 +1,5 @@
+contains_all,contains_any,does_not_contain,response_type,response_content
+"hello;world",,"",text,"Hello! How can I assist you today?"
+,"price;cost","shipping",text,"Our prices start at $10. Shipping fees may apply."
+"order;buy",,"cancel",buttons,"{""text"": ""Would you like to place an order?"", ""buttons"": [{""title"": ""Yes"", ""payload"": ""ORDER_YES""}, {""title"": ""No"", ""payload"": ""ORDER_NO""}]}"
+,unsubscribe;stop,,"text","You have been unsubscribed from notifications."

@@ -6,6 +6,12 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # This loads the variables from .env into the environment
+
+
 # Configuration: Read from environment variables.
 PAGE_ACCESS_TOKEN = os.getenv("PAGE_ACCESS_TOKEN", "YOUR_PAGE_ACCESS_TOKEN")
 VERIFY_TOKEN = os.getenv("VERIFY_TOKEN", "YOUR_VERIFY_TOKEN")
