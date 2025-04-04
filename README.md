@@ -55,8 +55,8 @@ This project is a Flask-based application that integrates with the Instagram Gra
     PORT=5000
 
    
-4. **Set Environment Variables:**
-   Create a CSV file (default: conditions.csv) with the following columns:
+4. **Create a CSV file:**
+    (default: conditions.csv) with the following columns:
 
     `contains_all:` Semicolon-separated list of keywords that must all be present.
 
