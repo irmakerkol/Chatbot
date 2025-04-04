@@ -55,18 +55,14 @@ This project is a Flask-based application that integrates with the Instagram Gra
 
    
 5. **CSV File Setup:**
-    # Columns:
-    # contains_all: Semicolon-separated list of keywords that must all be present.
-    # contains_any: Semicolon-separated list of keywords where at least one must be present.
-    # does_not_contain: Semicolon-separated list of keywords that must not be present.
-    # response_type: The type of response ("text" for plain text, "buttons" for button messages).
-    # response_content: For "text", this is the message string; for "buttons", this is a JSON string defining the button structure.
-    contains_all,contains_any,does_not_contain,response_type,response_content
-    "hello;world",,"",text,"Hello! How can I assist you today?"
-    ,"price;cost","shipping",text,"Our prices start at $10. Shipping fees may apply."
-    "order;buy",,"cancel",buttons,"{""text"": ""Would you like to place an order?"", ""buttons"": [{""title"": ""Yes"", ""payload"": ""ORDER_YES""}, {""title"": ""No"", ""payload"": ""ORDER_NO""}]}"
-    ,unsubscribe;stop,,"text","You have been unsubscribed from notifications."
-
+    Columns:
+      contains_all: Semicolon-separated list of keywords that must all be present.
+      contains_any: Semicolon-separated list of keywords where at least one must be present.
+      does_not_contain: Semicolon-separated list of keywords that must not be present.
+      response_type: The type of response ("text" for plain text, "buttons" for button messages).
+      response_content: For "text", this is the message string; for "buttons", this is a JSON string defining the button structure.
+  
+  Check conditions.csv file
   Row 1: The message must contain both "hello" and "world". A plain text greeting is sent.
 
   Row 2: The message must contain either "price" or "cost" but not "shipping". A pricing message is sent.
