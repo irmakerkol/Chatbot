@@ -5,31 +5,101 @@ This project is a Flask-based application that integrates with the Instagram Gra
 ## Features
 
 - **CSV-Based Rule Engine:**  
-  Define conditions with fields for:
-  - `contains_all` – All listed keywords must be present.
-  - `contains_any` – At least one listed keyword must be present.
-  - `does_not_contain` – None of the listed keywords should be present.
+  Define conditions with the following fields in a CSV file:
+  - `contains_all`: All listed keywords must be present in the incoming message.
+  - `contains_any`: At least one of the listed keywords must be present.
+  - `does_not_contain`: None of the listed keywords should be present.
   
 - **Multiple Response Types:**  
-  Send plain text responses or rich messages with buttons (in JSON format).
+  Send plain text responses or rich messages with buttons (using JSON format).
 
 - **Multi-Response Capability:**  
   If an incoming message matches more than one rule, all corresponding responses are sent.
 
 - **Instagram Integration:**  
-  The application uses Instagram Graph API for both receiving messages (via webhook) and sending responses.
+  Uses the Instagram Graph API to both receive messages (via webhook) and send responses.
 
 ## Requirements
 
 - Python 3.6+
-- Flask
-- Requests
-- A valid Instagram Business Account with access to the Instagram Graph API
+- [Flask](https://flask.palletsprojects.com/)
+- [Requests](https://docs.python-requests.org/)
+- [python-dotenv](https://github.com/theskumar/python-dotenv) (for loading environment variables)
 
-## Setup
+## Installation
 
-1. **Clone the repository:**
+1. **Clone the Repository:**
 
    ```bash
    git clone https://github.com/irmakerkol/Instagram-Chatbot
    cd instagram-chatbot
+
+   
+2. **Install Dependencies:**
+
+   pip install -r requirements.txt
+
+
+3. **Environment Variables:**
+
+    Create a .env file in the root directory of the project to set up your environment variables:
+    # Instagram API Credentials
+    PAGE_ACCESS_TOKEN=YOUR_PAGE_ACCESS_TOKEN
+    VERIFY_TOKEN=YOUR_VERIFY_TOKEN
+    
+    # Optional: Specify a custom CSV file path if not using the default 'conditions.csv'
+    CONDITIONS_CSV=conditions.csv
+    
+    # Optional: Specify the port on which the application will run (default is 5000)
+    PORT=5000
+
+   
+5. **CSV File Setup:**
+    # Columns:
+    # contains_all: Semicolon-separated list of keywords that must all be present.
+    # contains_any: Semicolon-separated list of keywords where at least one must be present.
+    # does_not_contain: Semicolon-separated list of keywords that must not be present.
+    # response_type: The type of response ("text" for plain text, "buttons" for button messages).
+    # response_content: For "text", this is the message string; for "buttons", this is a JSON string defining the button structure.
+    contains_all,contains_any,does_not_contain,response_type,response_content
+    "hello;world",,"",text,"Hello! How can I assist you today?"
+    ,"price;cost","shipping",text,"Our prices start at $10. Shipping fees may apply."
+    "order;buy",,"cancel",buttons,"{""text"": ""Would you like to place an order?"", ""buttons"": [{""title"": ""Yes"", ""payload"": ""ORDER_YES""}, {""title"": ""No"", ""payload"": ""ORDER_NO""}]}"
+    ,unsubscribe;stop,,"text","You have been unsubscribed from notifications."
+
+  Row 1: The message must contain both "hello" and "world". A plain text greeting is sent.
+
+  Row 2: The message must contain either "price" or "cost" but not "shipping". A pricing message is sent.
+  
+  Row 3: The message must contain both "order" and "buy", and must not include "cancel". A button message is sent.
+  
+  Row 4: If the message contains either "unsubscribe" or "stop", a text confirmation is sent.
+
+**Running the Application**
+Start the Flask Application:
+
+python ig_chatbot.py
+
+**Configure the Instagram Webhook:**
+
+In your Facebook Developer dashboard, set the webhook URL (e.g., https://yourdomain.com/webhook) for your Instagram Business Account. During verification, Instagram will send a GET request with hub.challenge and hub.verify_token. The app will return the challenge token if the VERIFY_TOKEN matches.
+
+
+**How It Works**
+Webhook Verification:
+Instagram sends a GET request for webhook verification. The app checks the provided verify token and returns the challenge if it matches.
+
+Message Processing:
+Incoming Instagram messages (found in the entry and messaging fields) are processed by comparing the message text against all rules defined in the CSV file.
+
+Response Sending:
+For every rule that matches, the app sends the corresponding response via the Instagram Graph API. If multiple rules match, multiple responses are sent.
+
+**Contributing**
+Contributions are welcome! Please feel free to open issues or submit pull requests.
+
+**License**
+This project is licensed under the MIT License.
+
+
+
