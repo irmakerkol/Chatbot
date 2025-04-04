@@ -39,7 +39,7 @@ This project is a Flask-based application that integrates with the Instagram Gra
    ```bash
    pip install -r requirements.txt
 
-2. **Set Environment Variables:**
+3. **Set Environment Variables:**
 
    Create a .env file in the root directory of the project with the following content:
 
@@ -54,5 +54,18 @@ This project is a Flask-based application that integrates with the Instagram Gra
     # Optional: Specify the port on which the application will run (default is 5000)
     PORT=5000
 
+   
+4. **Set Environment Variables:**
+   Create a CSV file (default: conditions.csv) with the following columns:
+
+    contains_all: Semicolon-separated list of keywords that must all be present.
+
+    contains_any: Semicolon-separated list of keywords where at least one must be present.
+
+    does_not_contain: Semicolon-separated list of keywords that must not be present.
+
+    response_type: The type of response (text for plain text, buttons for button messages).
+
+    response_content: For text, this is the message string; for buttons, this is a JSON string defining the button structure.
 
 
