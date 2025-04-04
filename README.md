@@ -1,11 +1,11 @@
 # Instagram Chatbot Integration with CSV-Based Conditions
 
-This project is a Flask-based application that integrates with the Instagram Graph API to create a highly flexible chatbot. The chatbot uses a CSV file to define keyword-based conditions and returns one or more responses (text messages or button messages) depending on the incoming Instagram message. It mimics ManyChat’s behavior by evaluating multiple conditions and sending multiple messages if needed.
+This project is a Flask-based application that integrates with the Instagram Graph API to create a highly flexible chatbot. The chatbot uses a CSV file to define keyword-based conditions and returns one or more responses (plain text or button messages) depending on the incoming Instagram message. It mimics ManyChat’s behavior by evaluating multiple conditions and sending multiple messages if needed.
 
 ## Features
 
 - **CSV-Based Rule Engine:**  
-  Define conditions with the following fields in a CSV file:
+  Define conditions in a CSV file using:
   - `contains_all`: All listed keywords must be present in the incoming message.
   - `contains_any`: At least one of the listed keywords must be present.
   - `does_not_contain`: None of the listed keywords should be present.
@@ -33,17 +33,18 @@ This project is a Flask-based application that integrates with the Instagram Gra
    ```bash
    git clone https://github.com/irmakerkol/Instagram-Chatbot
    cd instagram-chatbot
-
    
 2. **Install Dependencies:**
 
+   ```bash
    pip install -r requirements.txt
 
+2. **Set Environment Variables:**
 
-3. **Environment Variables:**
+   Create a .env file in the root directory of the project with the following content:
 
-    Create a .env file in the root directory of the project to set up your environment variables:
-    # Instagram API Credentials
+   ```dotenv
+   # Instagram API Credentials
     PAGE_ACCESS_TOKEN=YOUR_PAGE_ACCESS_TOKEN
     VERIFY_TOKEN=YOUR_VERIFY_TOKEN
     
@@ -52,50 +53,6 @@ This project is a Flask-based application that integrates with the Instagram Gra
     
     # Optional: Specify the port on which the application will run (default is 5000)
     PORT=5000
-
-   
-5. **CSV File Setup:**
-    Columns:
-      contains_all: Semicolon-separated list of keywords that must all be present.
-      contains_any: Semicolon-separated list of keywords where at least one must be present.
-      does_not_contain: Semicolon-separated list of keywords that must not be present.
-      response_type: The type of response ("text" for plain text, "buttons" for button messages).
-      response_content: For "text", this is the message string; for "buttons", this is a JSON string defining the button structure.
-  
-  Check conditions.csv file
-  Row 1: The message must contain both "hello" and "world". A plain text greeting is sent.
-
-  Row 2: The message must contain either "price" or "cost" but not "shipping". A pricing message is sent.
-  
-  Row 3: The message must contain both "order" and "buy", and must not include "cancel". A button message is sent.
-  
-  Row 4: If the message contains either "unsubscribe" or "stop", a text confirmation is sent.
-
-**Running the Application**
-Start the Flask Application:
-
-python ig_chatbot.py
-
-**Configure the Instagram Webhook:**
-
-In your Facebook Developer dashboard, set the webhook URL (e.g., https://yourdomain.com/webhook) for your Instagram Business Account. During verification, Instagram will send a GET request with hub.challenge and hub.verify_token. The app will return the challenge token if the VERIFY_TOKEN matches.
-
-
-**How It Works**
-Webhook Verification:
-Instagram sends a GET request for webhook verification. The app checks the provided verify token and returns the challenge if it matches.
-
-Message Processing:
-Incoming Instagram messages (found in the entry and messaging fields) are processed by comparing the message text against all rules defined in the CSV file.
-
-Response Sending:
-For every rule that matches, the app sends the corresponding response via the Instagram Graph API. If multiple rules match, multiple responses are sent.
-
-**Contributing**
-Contributions are welcome! Please feel free to open issues or submit pull requests.
-
-**License**
-This project is licensed under the MIT License.
 
 
 
